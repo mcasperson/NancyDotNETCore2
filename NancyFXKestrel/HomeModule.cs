@@ -7,7 +7,7 @@ namespace NancyFXKestrel
     {
         public HomeModule(IAppConfiguration appConfig)
         {
-            Get("/", args => "Hello World Again");
+            Get("/", args => "Hello World Again 2");
         }
     }
 }
