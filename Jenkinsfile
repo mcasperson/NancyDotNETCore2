@@ -37,6 +37,8 @@ spec:
 					withCredentials([string(credentialsId: 'OctopusAPIKey', variable: 'APIKey')]) {
 						sh """
 							octo push --package NancyFXKestrel/bin/Debug/NancyFXKestrel.1.0.0.nupkg --replace-existing --server https://master.octopushq.com --apiKey ${APIKey}
+							octo create-release --progress --project=Jenkins --apiKey ${APIKey}
+							octo deploy-release --progress --project=Jenkins --deployto=Java --apiKey ${APIKey}
 						"""
 					}
 				}
