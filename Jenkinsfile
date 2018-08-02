@@ -38,7 +38,7 @@ spec:
 						sh """
 							octo push --package NancyFXKestrel/bin/Debug/NancyFXKestrel.1.0.0.nupkg --replace-existing --server https://master.octopushq.com --apiKey ${APIKey}
 							octo create-release --progress --project=Jenkins --server https://master.octopushq.com --apiKey ${APIKey}
-							octo deploy-release --progress --project=Jenkins --deployto=Java --server https://master.octopushq.com --apiKey ${APIKey}
+							octo deploy-release --progress --project=Jenkins --deployto=Java --version=latest --server https://master.octopushq.com --apiKey ${APIKey}
 						"""
 					}
 				}
