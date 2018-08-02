@@ -13,6 +13,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: octo
+    image: octopusdeploy/octo
+    command:
+    - cat
+    tty: true	
 """
 		}
 	}
@@ -22,6 +27,18 @@ spec:
 				container('dotnet') {
 					sh 'dotnet restore'
 					sh 'dotnet build'
+					sh 'dotnet pack'
+				}
+            }
+        }
+		stage ('Publish') {
+            steps {
+				container('octo') {
+					withCredentials([string(credentialsId: 'OctopusAPIKey', variable: 'APIKey')]) {
+						sh """
+							octo push --package NancyFXKestrel/bin/Debug/NancyFXKestrel.1.0.0.nupkg --replace-existing --server https://master.octopushq.com --apiKey ${APIKey}
+						"""
+					}
 				}
             }
         }
